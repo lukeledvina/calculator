@@ -1,0 +1,37 @@
+html {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.calculator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    width: 400px;
+    flex-direction: column;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.display {
+
+}
+.clear {
+    width: 100px;
+}
+
+.button-container div {
+    width: 100px;
+    text-align: center;
+}
+
