@@ -20,3 +20,13 @@ function operate(operator, a, b) {
     else if(operator === 'x') return multiply(a, b);
     else if(operator === '/') return divide(a, b);
 }
+
+let buttonContainer = document.querySelector('.button-container');
+let calcButtons = Array.from(buttonContainer.children);
+let display = document.querySelector('.display');
+
+calcButtons.forEach(element => element.addEventListener('click', () => {
+    let displayValue = element.textContent;
+    display.textContent = displayValue;
+}));
+
