@@ -24,9 +24,32 @@ function operate(operator, a, b) {
 let buttonContainer = document.querySelector('.button-container');
 let calcButtons = Array.from(buttonContainer.children);
 let display = document.querySelector('.display');
+let firstValue = '';
+let secondValue = '';
+let firstNumber = true;
+let calcOperation = '';
 
 calcButtons.forEach(element => element.addEventListener('click', () => {
-    let displayValue = element.textContent;
-    display.textContent = displayValue;
+    
+
+    if(element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/') {
+        display.textContent = '';
+        firstNumber = false;
+        calcOperation = element.textContent;
+    } else if(element.textContent === '=' && firstValue !== '' && secondValue !== ''){
+        firstValue = operate(calcOperation, firstValue, secondValue);
+        display.textContent = firstValue;
+        secondValue = '';
+    } else if(!firstNumber) {
+        secondValue += element.textContent;
+        display.textContent = secondValue;
+        console.log(secondValue);
+    } else if(firstNumber) {
+        firstValue += element.textContent;
+        display.textContent = firstValue;
+        console.log(firstValue);
+        console.log(firstNumber)
+    } 
+    
 }));
 
