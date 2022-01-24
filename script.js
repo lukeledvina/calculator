@@ -32,13 +32,17 @@ let calcOperation = '';
 calcButtons.forEach(element => element.addEventListener('click', () => {
     
 
+    // Breaks when another number is input after operate is called, instead of immediatly being another operator
+
     if(element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/') {
-        display.textContent = '';
+        
         firstNumber = false;
         calcOperation = element.textContent;
     } else if(element.textContent === '=' && firstValue !== '' && secondValue !== ''){
-        firstValue = operate(calcOperation, firstValue, secondValue);
-        display.textContent = firstValue;
+        firstValue = parseFloat(firstValue);
+        secondValue = parseFloat(secondValue);
+        display.textContent = operate(calcOperation, firstValue, secondValue);
+        firstValue = display.textContent;
         secondValue = '';
     } else if(!firstNumber) {
         secondValue += element.textContent;
@@ -53,3 +57,11 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
     
 }));
 
+let clearButton = document.querySelector('.clear');
+clearButton.addEventListener('click', () => {
+    firstValue = '';
+    firstNumber = true;
+    secondValue = '';
+    calcOperation = '';
+    display.textContent = 'Enter a number:';
+})
