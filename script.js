@@ -24,6 +24,7 @@ function operate(operator, a, b) {
 let buttonContainer = document.querySelector('.button-container');
 let calcButtons = Array.from(buttonContainer.children);
 let display = document.querySelector('.display');
+let decimalButton = document.querySelector('.decimal');
 let firstValue = '';
 let secondValue = '';
 let firstNumber = true;
@@ -31,16 +32,19 @@ let calcOperation = '';
 
 calcButtons.forEach(element => element.addEventListener('click', () => {
     
+    
 
+    if(display.textContent.includes('.')) {
+        decimalButton.disabled = true;
+    } else {
+        decimalButton.disabled = false;
+    }
     // Breaks when another number is input after operate is called, instead of immediatly being another operator
     // operators and equals break equation if input before first number
     // equals breaks if input before both numbers are entered (wording here might mess you up)
 
-    if(element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/') {
-        
-        firstNumber = false;
-        calcOperation = element.textContent;
-    } else if(element.textContent === '=' && firstValue !== '' && secondValue !== ''){
+    // THIS LINE CANT BE HERE, IF INPUT FIRST IMMEDIATLY SETS FIRSTNUMBER TO FALSE
+    if(element.textContent === '=' && firstValue !== '' && secondValue !== ''){
         firstValue = parseFloat(firstValue);
         secondValue = parseFloat(secondValue);
         if(secondValue == 0 && calcOperation === '/') {
@@ -52,15 +56,24 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
         }
         secondValue = '';
         
-    } else if(!firstNumber) {
+    } else if((firstValue !== '' || secondValue !== '') && (element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/')) {
+        
+        firstNumber = false;
+        calcOperation = element.textContent;
+    }  else if(!firstNumber) {
         secondValue += element.textContent;
         display.textContent = secondValue;
         console.log(secondValue);
     } else if(firstNumber) {
-        firstValue += element.textContent;
-        display.textContent = firstValue;
-        console.log(firstValue);
-        console.log(firstNumber)
+        if(element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/' || element.textContent === '=') {
+            
+        } else {
+            firstValue += element.textContent;
+            display.textContent = firstValue;
+            console.log(firstValue);
+            console.log(firstNumber)
+        }
+
     } 
     
 }));
