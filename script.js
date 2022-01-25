@@ -29,20 +29,19 @@ let firstValue = '';
 let secondValue = '';
 let firstNumber = true;
 let calcOperation = '';
+let lastButtonPressed = false;
 
 calcButtons.forEach(element => element.addEventListener('click', () => {
-    
+
     
 
     if(element.textContent === '.' && !(display.textContent.includes('.'))) {
         decimalButton.disabled = true;
     }
     
-    // Breaks when another number is input after operate is called, instead of immediatly being another operator
-    // operators and equals break equation if input before first number
-    // equals breaks if input before both numbers are entered (wording here might mess you up)
+    // if a number is pressed immediately after equals, it breaks 
+    // Clear the calculator in this case
 
-    // THIS LINE CANT BE HERE, IF INPUT FIRST IMMEDIATLY SETS FIRSTNUMBER TO FALSE
     if((element.textContent === '=' || element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/') && firstValue !== '' && secondValue !== ''){
         firstValue = parseFloat(firstValue);
         secondValue = parseFloat(secondValue);
@@ -55,22 +54,36 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
             firstValue = display.textContent;
             calcOperation = element.textContent;
             decimalButton.disabled = false;
+            if(element.textContent === '=') {
+                lastButtonPressed = true;
+            }
         }
         secondValue = '';
-        //else if()
-    } else if(element.textContent === '=' && secondValue === '') {
+
+    } /*else if(lastButtonPressed && firstValue !== '' && (element.textContent === '0' || !element.textContent === '1' || !element.textContent === '2' || !element.textContent === '3' || !element.textContent === '4' || !element.textContent === '5' || !element.textContent === '6' || !element.textContent === '7' || !element.textContent === '8' || !element.textContent === '9' || !element.textContent === '.')) {
+        clearCalc();
+    }*/
+    else if(element.textContent === '=' && secondValue === '') {
         
     }
     else if(firstValue !== '' && (element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/')) {
-        
+        lastButtonPressed = false;
         firstNumber = false;
         decimalButton.disabled = false;
         calcOperation = element.textContent;
     }  
     else if(!firstNumber) {
-        secondValue += element.textContent;
-        display.textContent = secondValue;
-        console.log(secondValue);
+        if(lastButtonPressed) {
+            clearCalc();
+            firstValue = element.textContent;
+            display.textContent = firstValue;
+        } else {
+            secondValue += element.textContent;
+            display.textContent = secondValue;
+            console.log(secondValue); 
+        }
+        
+        
     } 
     else if(firstNumber) {
         if(element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/' || element.textContent === '=') {
