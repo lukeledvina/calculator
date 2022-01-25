@@ -11,7 +11,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return Math.round((a / b) * 100000) / 100000;
+    return a / b;
 }
 
 function operate(operator, a, b) {
@@ -54,7 +54,7 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
             clearCalc();
             display.textContent = 'lol'; 
         } else {
-            display.textContent = operate(calcOperation, firstValue, secondValue);
+            display.textContent = Math.round(operate(calcOperation, firstValue, secondValue) * 100000) / 100000;
             firstValue = display.textContent;
             calcOperation = element.textContent;
         }
