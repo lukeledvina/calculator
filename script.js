@@ -60,7 +60,10 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
         }
         secondValue = '';
         //else if()
-    } else if((firstValue !== '' || secondValue !== '') && (element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/')) {
+    } else if(element.textContent === '=' && secondValue === '') {
+        
+    }
+    else if(firstValue !== '' && (element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/')) {
         
         firstNumber = false;
         calcOperation = element.textContent;
