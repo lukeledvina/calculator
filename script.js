@@ -34,12 +34,9 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
     
     
 
-    if(display.textContent.includes('.')) {
+    if(element.textContent === '.' && !(display.textContent.includes('.'))) {
         decimalButton.disabled = true;
-    } else {
-        decimalButton.disabled = false;
     }
-
     
     // Breaks when another number is input after operate is called, instead of immediatly being another operator
     // operators and equals break equation if input before first number
@@ -57,6 +54,7 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
             display.textContent = Math.round(operate(calcOperation, firstValue, secondValue) * 100000) / 100000;
             firstValue = display.textContent;
             calcOperation = element.textContent;
+            decimalButton.disabled = false;
         }
         secondValue = '';
         //else if()
@@ -66,6 +64,7 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
     else if(firstValue !== '' && (element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/')) {
         
         firstNumber = false;
+        decimalButton.disabled = false;
         calcOperation = element.textContent;
     }  
     else if(!firstNumber) {
@@ -89,6 +88,7 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
 }));
 
 function clearCalc() {
+    decimalButton.disabled = false;
     firstValue = '';
     firstNumber = true;
     secondValue = '';
