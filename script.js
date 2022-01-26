@@ -23,7 +23,7 @@ function operate(operator, a, b) {
 
 let buttonContainer = document.querySelector('.button-container');
 let calcButtons = Array.from(buttonContainer.children);
-let display = document.querySelector('.display');
+let display = document.querySelector('#display-text');
 let decimalButton = document.querySelector('.decimal');
 let firstValue = '';
 let secondValue = '';
@@ -69,6 +69,9 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
     }
     else if(element.textContent === '=' && secondValue === '') {
         
+    } else if(element.textContent === '-' && calcOperation != '') {
+        secondValue += element.textContent;
+        display.textContent = secondValue;
     }
     else if(firstValue !== '' && (element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/')) {
         lastButtonPressed = false;
@@ -94,8 +97,11 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
         }    
     } 
     else if(firstNumber) {
-        if(element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/' || element.textContent === '=') {
+        if(element.textContent === '+' || element.textContent === 'x' || element.textContent === '/' || element.textContent === '=') {
             
+        } else if(element.textContent === '-' && firstValue === '') {
+            firstValue += element.textContent;
+            display.textContent = firstValue;
         } else if(element.textContent === 'Delete') {
             display.textContent = display.textContent.slice(0, -1);
             firstValue = display.textContent;
@@ -103,8 +109,6 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
         else {
             firstValue += element.textContent;
             display.textContent = firstValue;
-            console.log(firstValue);
-            console.log(firstNumber)
         }
 
     } 
