@@ -60,6 +60,7 @@ div .operator {
 
 div .clear {
     background-color: rgb(230, 116, 116);
+    width: 200px;
 }
 
 div .delete {
