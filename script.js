@@ -25,20 +25,12 @@ let buttonContainer = document.querySelector('.button-container');
 let calcButtons = Array.from(buttonContainer.children);
 let display = document.querySelector('#display-text');
 let decimalButton = document.querySelector('.decimal');
+
 let firstValue = '';
 let secondValue = '';
 let firstNumber = true;
 let calcOperation = '';
 let lastButtonPressed = false;
-
-
-/*
-TODO: 
-ADD KEYBOARD SUPPORT
-MAKE PLUS/MINUS WORK
-MAKE IT LOOK NICE
-*/
-
 
 calcButtons.forEach(element => element.addEventListener('click', () => {
     
@@ -46,8 +38,6 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
         decimalButton.disabled = true;
     }
 
-
-    
     if((element.textContent === '=' || element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/') && firstValue !== '' && secondValue !== ''){
         firstValue = parseFloat(firstValue);
         secondValue = parseFloat(secondValue);
@@ -55,24 +45,26 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
         if(secondValue == 0 && calcOperation === '/') {
             clearCalc();
             display.textContent = 'lol'; 
-        } else {
+        } 
+        else {
             display.textContent = Math.round(operate(calcOperation, firstValue, secondValue) * 100000) / 100000;
             firstValue = display.textContent;
             calcOperation = element.textContent;
             decimalButton.disabled = false;
+            
             if(element.textContent === '=') {
                 lastButtonPressed = true;
             }
         }
         secondValue = '';
-
-    }
+    } 
     else if(element.textContent === '=' && secondValue === '') {
         
-    } else if(element.textContent === '-' && calcOperation != '') {
+    } 
+    else if(element.textContent === '-' && calcOperation != '') {
         secondValue += element.textContent;
         display.textContent = secondValue;
-    }
+    } 
     else if(firstValue !== '' && (element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/')) {
         lastButtonPressed = false;
         firstNumber = false;
@@ -83,14 +75,17 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
         if(lastButtonPressed && element.textContent === 'Delete') {
             firstValue = display.textContent.slice(0, -1);
             display.textContent = firstValue;
-        } else if(lastButtonPressed) {
+        } 
+        else if(lastButtonPressed) {
             clearCalc();
             firstValue = element.textContent;
             display.textContent = firstValue;
-        }else if(element.textContent === 'Delete'){
+        }
+        else if(element.textContent === 'Delete'){
             display.textContent = display.textContent.slice(0, -1);
             secondValue = display.textContent;
-        } else {
+        } 
+        else {
             secondValue += element.textContent;
             display.textContent = secondValue;
             console.log(secondValue); 
@@ -99,10 +94,12 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
     else if(firstNumber) {
         if(element.textContent === '+' || element.textContent === 'x' || element.textContent === '/' || element.textContent === '=') {
             
-        } else if(element.textContent === '-' && firstValue === '') {
+        } 
+        else if(element.textContent === '-' && firstValue === '') {
             firstValue += element.textContent;
             display.textContent = firstValue;
-        } else if(element.textContent === 'Delete') {
+        } 
+        else if(element.textContent === 'Delete') {
             display.textContent = display.textContent.slice(0, -1);
             firstValue = display.textContent;
         }
@@ -110,9 +107,7 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
             firstValue += element.textContent;
             display.textContent = firstValue;
         }
-
-    } 
-    
+    }  
 }));
 
 function clearCalc() {
