@@ -13,12 +13,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: lightslategray;
+    background-color: rgb(44, 44, 44);
     width: 400px;
     flex-direction: column;
     border-style: solid;
     border-width: 15px;
-    border-color: lightslategray;
+    border-color: rgb(44, 44, 44);
 }
 
 .button-container {
@@ -31,6 +31,7 @@ body {
     height: 100px;
     width: 400px;
     margin-bottom: 15px;
+    
 }
 .clear {
     width: 100px;
@@ -39,11 +40,29 @@ body {
 .button-container button {
     width: 100px;
     text-align: center;
-    background-color: rgb(138, 180, 197);
+    background-color: rgb(117, 248, 215);
     height: 100px;
     border-color: rgb(105, 105, 163);
+    font-size: 20px;
 }
 
 #equals-button {
     width: 200px;
+    background-color: rgb(115, 255, 115);
+}
+
+div .operator {
+    background-color: rgb(251, 137, 223);
+}
+
+div .clear {
+    background-color: rgb(230, 116, 116);
+}
+
+div .delete {
+    background-color: rgb(235, 248, 121);
+}
+
+div .plus-minus {
+    background-color: rgb(138, 226, 253);
 }
