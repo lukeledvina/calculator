@@ -1,13 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 @font-face {
-    font-family: CalculatorFont;
-    src: url(CalcFont.ttf) format("truetype");
-    font-weight: normal;
-    font-style: normal;
-    font-size: 25px;
+    font-family: CalcFont;
+    src: url(CalcFont.ttf);
 }
+
 html {
     box-sizing: border-box;
-    
 }
 
 body {
@@ -15,10 +14,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    font-family: CalculatorFont, Tahoma, sans-serif;
-
+    font-family: CalcFont, 'Bebas Neue', Tahoma, sans-serif;
 }
-
 
 .calculator {
     display: flex;
