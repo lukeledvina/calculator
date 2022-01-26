@@ -31,17 +31,24 @@ let firstNumber = true;
 let calcOperation = '';
 let lastButtonPressed = false;
 
+
+/*
+TODO: 
+MAKE DELETE KEY WORK
+ADD KEYBOARD SUPPORT
+MAKE PLUS/MINUS WORK
+MAKE IT LOOK NICE
+*/
+
+
 calcButtons.forEach(element => element.addEventListener('click', () => {
-
     
-
     if(element.textContent === '.' && !(display.textContent.includes('.'))) {
         decimalButton.disabled = true;
     }
-    
-    // if a number is pressed immediately after equals, it breaks 
-    // Clear the calculator in this case
 
+
+    
     if((element.textContent === '=' || element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/') && firstValue !== '' && secondValue !== ''){
         firstValue = parseFloat(firstValue);
         secondValue = parseFloat(secondValue);
@@ -60,9 +67,7 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
         }
         secondValue = '';
 
-    } /*else if(lastButtonPressed && firstValue !== '' && (element.textContent === '0' || !element.textContent === '1' || !element.textContent === '2' || !element.textContent === '3' || !element.textContent === '4' || !element.textContent === '5' || !element.textContent === '6' || !element.textContent === '7' || !element.textContent === '8' || !element.textContent === '9' || !element.textContent === '.')) {
-        clearCalc();
-    }*/
+    }
     else if(element.textContent === '=' && secondValue === '') {
         
     }
@@ -73,23 +78,30 @@ calcButtons.forEach(element => element.addEventListener('click', () => {
         calcOperation = element.textContent;
     }  
     else if(!firstNumber) {
-        if(lastButtonPressed) {
+        if(lastButtonPressed && element.textContent === 'Delete') {
+            firstValue = display.textContent.slice(0, -1);
+            display.textContent = firstValue;
+        } else if(lastButtonPressed) {
             clearCalc();
             firstValue = element.textContent;
             display.textContent = firstValue;
+        }else if(element.textContent === 'Delete'){
+            display.textContent = display.textContent.slice(0, -1);
+            secondValue = display.textContent;
         } else {
             secondValue += element.textContent;
             display.textContent = secondValue;
             console.log(secondValue); 
-        }
-        
-        
+        }    
     } 
     else if(firstNumber) {
         if(element.textContent === '+' || element.textContent === '-' || element.textContent === 'x' || element.textContent === '/' || element.textContent === '=') {
             
+        } else if(element.textContent === 'Delete') {
+            display.textContent = display.textContent.slice(0, -1);
+            firstValue = display.textContent;
         }
-         else {
+        else {
             firstValue += element.textContent;
             display.textContent = firstValue;
             console.log(firstValue);
